@@ -7,7 +7,9 @@ services:
                 dockerfile: dockerfile-php7-4-apache
         container_name: php7.4-apache
         volumes :
-                 - ./app:/var/www/html  
+                 - ./app:/var/www/html
+        secrets:
+                 - id_rsa
         ports:
                 - "80:80" 
 
@@ -26,3 +28,7 @@ services:
         restart: always
         ports:
                 - "8080:80"
+
+secrets:
+    id_rsa:
+        file: /home/ljr95/.ssh/github_rsa

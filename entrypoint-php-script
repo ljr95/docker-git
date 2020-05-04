@@ -1,6 +1,15 @@
 #!/bin/sh
-GITDEPOT="https://github.com/ljr95/docker-symfony-git.git"
+GITDEPOT="git@github.com:ljr95/symfony-plateforme-revendeur.git"
 DIR="/var/www/html"
+
+eval "$(ssh-agent -s)"
+if [ ! -d "/root/.ssh/" ]; then
+    ssh-add -k /run/secrets/id_rsa
+    mkdir /root/.ssh
+    ssh-keyscan github.com > /root/.ssh/known_hosts
+    # now execute command which require authentication via ssh (example, git clone from a private repo)
+fi
+
 # look for empty dir 
 if [ "$(ls -A $DIR)" ]; then
 	echo "$DIR is not empty"
