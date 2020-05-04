@@ -1,5 +1,5 @@
 #!/bin/sh
-GITDEPOT="git@github.com:ljr95/docker-git.git"
+GITDEPOT="https://github.com/ljr95/docker-git.git"
 DIR="/var/www/html"
 
 eval "$(ssh-agent -s)"
