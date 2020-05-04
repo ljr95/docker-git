@@ -1,0 +1,28 @@
+version: '3.7'
+
+services:
+    php7.4-apache:
+        build:
+                context: .
+                dockerfile: dockerfile-php7-4-apache
+        container_name: php7.4-apache
+        volumes :
+                 - ./app:/var/www/html  
+        ports:
+                - "80:80" 
+
+    db:
+        image: mysql
+        command: --default-authentication-plugin=mysql_native_password
+        restart: always
+        volumes:
+                - ./mysql:/var/lib/mysql
+        environment:
+                MYSQL_ROOT_PASSWORD: root
+
+    phpmyadmin:
+        image: phpmyadmin/phpmyadmin
+        container_name: phpmyadmin
+        restart: always
+        ports:
+                - "8080:80"

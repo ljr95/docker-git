@@ -1,0 +1,23 @@
+#!/bin/sh
+GITDEPOT="https://github.com/ljr95/docker-symfony-git.git"
+DIR="/var/www/html"
+# look for empty dir 
+if [ "$(ls -A $DIR)" ]; then
+	echo "$DIR is not empty"
+
+	if [ "$(ls -A $DIR/.git)" ]; then
+		echo "Upgrade projet"
+		git fetch --all
+		git pull
+		composer install		
+	else
+		echo "There is no git folder"
+	fi
+
+else
+    echo "$DIR est vide, initialisation du projet"
+    git clone $GITDEPOT /var/www/html/
+    composer install
+fi
+
+exec apache2-foreground
