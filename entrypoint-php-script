@@ -1,5 +1,5 @@
 #!/bin/sh
-GITDEPOT="git@github.com:ljr95/symfony-plateforme-revendeur.git"
+GITDEPOT="git@github.com:ljr95/docker-git.git"
 DIR="/var/www/html"
 
 eval "$(ssh-agent -s)"
