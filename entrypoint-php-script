@@ -10,7 +10,7 @@ if [ ! -d "/root/.ssh/" ]; then
     # now execute command which require authentication via ssh (example, git clone from a private repo)
 fi
 
-# look for empty dir 
+# look for empty dir
 if [ "$(ls -A $DIR)" ]; then
 	echo "$DIR is not empty"
 
@@ -18,7 +18,7 @@ if [ "$(ls -A $DIR)" ]; then
 		echo "Upgrade projet"
 		git fetch --all
 		git pull
-		composer install		
+		composer update
 	else
 		echo "There is no git folder"
 	fi
