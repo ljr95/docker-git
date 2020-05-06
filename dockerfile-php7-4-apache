@@ -4,12 +4,16 @@ ENV APACHE_DOCUMENT_ROOT /var/www/html/public
 
 RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-available/*.conf
 RUN sed -ri -e 's!/var/www/!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf
+RUN a2enmod rewrite
 
 RUN apt-get update && apt-get install -y \
     git \
-    zip \
     unzip \
-&& docker-php-ext-install pdo_mysql \
+    libzip-dev \
+    libxml2-dev \
+    libxslt-dev \
+    libgcrypt-dev \
+&& docker-php-ext-install intl zip pdo_mysql xml xsl bcmath \
 && docker-php-source delete \
 && rm -rf /var/lib/apt/lists/*
 
@@ -19,7 +23,4 @@ WORKDIR /var/www/html/
 
 COPY entrypoint-php-script /usr/local/bin/
 ENTRYPOINT ["bash", "entrypoint-php-script"]
-
-
-#CMD git clone https://github.com/symfony/website-skeleton.git /var/www/html && composer install && apache2-foreground
 
