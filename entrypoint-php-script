@@ -18,7 +18,7 @@ if [ "$(ls -A $DIR)" ]; then
 		echo "Upgrade projet"
 		git fetch --all
 		git pull
-		composer update
+		composer install
 	else
 		echo "There is no git folder"
 	fi
